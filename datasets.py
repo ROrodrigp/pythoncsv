@@ -22,7 +22,13 @@ graduate_admissions = np.genfromtxt('/Users/ROrodri/Documents/pythoncsv/Admissio
 print(graduate_admissions)
 print(graduate_admissions.shape)
 print(graduate_admissions['CGPA'][0:5])
+print(graduate_admissions['Chance_of_Admit'][0:5])
 
 graduate_admissions['CGPA'] = graduate_admissions['CGPA'] /10 * 4
 print(graduate_admissions['CGPA'][:20])
 print(len(graduate_admissions[graduate_admissions['Research'] == 1]))
+
+#Verificar si los estudiantes con altas posibilidades de aceptación >0.8 tienen en promedio un puntaje de GRE más alto 
+
+print(graduate_admissions[graduate_admissions['Chance_of_Admit'] > 0.8 ]['GRE_score'].mean())
+print(graduate_admissions[graduate_admissions['Chance_of_Admit'] < 0.4 ]['GRE_score'].mean())
