@@ -32,3 +32,7 @@ print(len(graduate_admissions[graduate_admissions['Research'] == 1]))
 
 print(graduate_admissions[graduate_admissions['Chance_of_Admit'] > 0.8 ]['GRE_score'].mean())
 print(graduate_admissions[graduate_admissions['Chance_of_Admit'] < 0.4 ]['GRE_score'].mean())
+
+#Realizaremos lo mismo con el punta de CGPA
+print(graduate_admissions[graduate_admissions['Chance_of_Admit'] > 0.8 ]['CGPA'].mean())
+print(graduate_admissions[graduate_admissions['Chance_of_Admit'] < 0.4 ]['CGPA'].mean())
