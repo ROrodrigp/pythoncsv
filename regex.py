@@ -39,3 +39,51 @@ print(re.findall('AC|AB',grades))
 print(re.findall('[^A]',grades))
 print(re.findall('^[^A]',grades))
 
+#                                    QUANTIFIERS
+# Quantifiers are the number of times you want a pattern to be matched in order to match. The most basic
+# quantifier is expressed as e{m,n}, where e is the expression or character we are matching, m is the minimum
+# number of times you want it to matched, and n is the maximum number of times the item could be matched.
+
+print(re.findall('A{2,10}',grades))
+print(re.findall('A{1,1}A{1,1}',grades))
+
+# Using this, we could find a decreasing trend in a student's grades
+print(re.findall("A{1,10}B{1,10}C{1,10}",grades))
+
+
+# Now, that's a bit of a hack, because we included a maximum that was just arbitrarily large. There are three
+# other quantifiers that are used as short hand, an asterix * to match 0 or more times, a question mark ? to
+# match one or more times, or a + plus sign to match one or more times. Lets look at a more complex example,
+# and load some data scraped from wikipedia
+
+with open("ferpa.txt","r") as file:
+    # we'll read that into a variable called wiki
+    wiki=file.read()
+#print(wiki)
+
+# Scanning through this document one of the things we notice is that the headers all have the words [edit]
+# behind them, followed by a newline character. So if we wanted to get a list of all of the headers in this
+# article we could do so using re.findall
+print(re.findall("[a-zA-Z]{1,100}\[edit\]",wiki))
+
+print(re.findall('[\w]{1,100}\[edit\]',wiki))
+
+print(re.findall('[\w]*\[edit\]',wiki))
+print(re.findall('[\w ]*\[edit\]',wiki))
+
+for title in re.findall('[\w ]*\[edit\]',wiki):
+    print(re.split('[\[]',title)[0])
+
+
+
+#                                               GROUPS
+# To group patterns together you use parentheses, which is actually
+# pretty natural. Lets rewrite our findall using groups
+print('\n\n\n')
+print(re.findall("([\w ]*)(\[edit\])",wiki))
+for item in re.finditer("([\w ]*)(\[edit\])",wiki):
+    print(item.groups())
+
+
+for item in re.finditer('([\w ]*)(\[edit\])',wiki):
+    print(item.group(1))
